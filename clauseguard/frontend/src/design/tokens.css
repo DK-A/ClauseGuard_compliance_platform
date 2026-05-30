@@ -1,0 +1,123 @@
+:root {
+  /* Brand colors */
+  --surface: #121317;
+  --surface-dim: #121317;
+  --surface-bright: #38393e;
+  --surface-container-lowest: #0d0e12;
+  --surface-container-low: #1a1b20;
+  --surface-container: #1f1f24;
+  --surface-container-high: #292a2e;
+  --surface-container-highest: #343439;
+  
+  --on-surface: #e3e2e8;
+  --on-surface-variant: #c3c6d7;
+  --inverse-surface: #e3e2e8;
+  --inverse-on-surface: #2f3035;
+  
+  --outline: #8d90a0;
+  --outline-variant: #434655;
+  --surface-tint: #b4c5ff;
+  
+  --primary: #2563eb; /* Primary Cobalt */
+  --primary-accent: #b4c5ff;
+  --on-primary: #ffffff;
+  --primary-container: #2563eb;
+  --on-primary-container: #eeefff;
+  
+  --secondary: #c6c6cd;
+  --on-secondary: #2e3036;
+  --secondary-container: #47494f;
+  --on-secondary-container: #b7b8bf;
+  
+  --tertiary: #ffb596;
+  --on-tertiary: #581e00;
+  --tertiary-container: #bc4800;
+  --on-tertiary-container: #ffede6;
+  
+  --error: #ffb4ab;
+  --on-error: #690005;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+  
+  --background: #0b0c10;
+  --on-background: #e3e2e8;
+  
+  /* Font parameters */
+  --font-headline: 'IBM Plex Mono', monospace;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Layout constraints */
+  --rounded-sm: 0.25rem;
+  --rounded-default: 0.5rem;
+  --rounded-md: 0.75rem;
+  --rounded-lg: 1rem;
+  --rounded-xl: 1.5rem;
+  --rounded-full: 9999px;
+  
+  --spacing-container: 2rem;
+  --spacing-card-gap: 1.5rem;
+  --spacing-section-margin: 4rem;
+  --spacing-gutter: 1rem;
+  --spacing-stack-sm: 0.5rem;
+  --spacing-stack-md: 1rem;
+  --spacing-stack-lg: 2rem;
+}
+
+[data-theme="light"] {
+  /* Brand colors for light theme */
+  --surface: #ffffff;
+  --surface-dim: #f1f5f9;
+  --surface-bright: #ffffff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f8fafc;
+  --surface-container: #f1f5f9;
+  --surface-container-high: #e2e8f0;
+  --surface-container-highest: #cbd5e1;
+  
+  --on-surface: #0f172a;
+  --on-surface-variant: #475569;
+  --inverse-surface: #0f172a;
+  --inverse-on-surface: #f8fafc;
+  
+  --outline: #94a3b8;
+  --outline-variant: #cbd5e1;
+  --surface-tint: #2563eb;
+  
+  --primary: #2563eb;
+  --primary-accent: #1d4ed8;
+  --on-primary: #ffffff;
+  --primary-container: #dbeafe;
+  --on-primary-container: #1e40af;
+  
+  --secondary: #64748b;
+  --on-secondary: #ffffff;
+  --secondary-container: #e2e8f0;
+  --on-secondary-container: #334155;
+  
+  --tertiary: #ea580c;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #ffede6;
+  --on-tertiary-container: #c2410c;
+  
+  --error: #dc2626;
+  --on-error: #ffffff;
+  --error-container: #fee2e2;
+  --on-error-container: #991b1b;
+  
+  --background: #f8fafc;
+  --on-background: #0f172a;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}

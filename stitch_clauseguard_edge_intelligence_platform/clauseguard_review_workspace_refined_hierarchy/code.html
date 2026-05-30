@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ClauseGuard | Review Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0e12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1b2030;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+        .clause-highlight-added {
+            background-color: rgba(37, 99, 235, 0.12);
+            border-bottom: 2px solid #2563eb;
+            color: #b4c5ff;
+            padding: 0 2px;
+        }
+        .clause-highlight-removed {
+            background-color: rgba(239, 68, 68, 0.1);
+            text-decoration: line-through;
+            color: #ffb4ab;
+            padding: 0 2px;
+        }
+        .entity-highlight {
+            border-bottom: 1px dashed #8d90a0;
+            color: #e3e2e8;
+            font-weight: 500;
+        }
+        .active-glow {
+            box-shadow: 0 0 20px -5px rgba(37, 99, 235, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#1a1b21",
+                        "on-secondary-container": "#b7b8bf",
+                        "primary-container": "#2563eb",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-background": "#e3e2e8",
+                        "on-error": "#690005",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-dim": "#121317",
+                        surface: "#121317",
+                        "surface-bright": "#38393e",
+                        "on-tertiary": "#581e00",
+                        background: "#0d0e12",
+                        "on-primary-fixed": "#00174b",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#bc4800",
+                        "tertiary-fixed": "#ffdbcd",
+                        outline: "#8d90a0",
+                        primary: "#b4c5ff",
+                        "on-secondary": "#2e3036",
+                        "surface-container": "#1f1f24",
+                        error: "#ffb4ab",
+                        "surface-container-high": "#292a2e",
+                        "on-tertiary-fixed": "#360f00",
+                        "secondary-fixed-dim": "#c6c6cd",
+                        "inverse-on-surface": "#2f3035",
+                        "inverse-primary": "#0053db",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        secondary: "#c6c6cd",
+                        "on-primary": "#002a78",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-container-low": "#1a1b20",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-lowest": "#0d0e12",
+                        "surface-tint": "#b4c5ff",
+                        "error-container": "#93000a",
+                        "secondary-container": "#47494f",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-variant": "#343439",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-surface": "#e3e2e8",
+                        "secondary-fixed": "#e2e2e9",
+                        "on-secondary-fixed-variant": "#45474c",
+                        "surface-container-highest": "#343439",
+                        "primary-fixed-dim": "#b4c5ff",
+                        tertiary: "#ffb596",
+                        "inverse-surface": "#e3e2e8",
+                        "outline-variant": "#434655",
+                        "premium-surface": "#1b2030",
+                        "cobalt": "#2563eb"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "stack-sm": "0.5rem",
+                        "stack-md": "1rem",
+                        "container-padding": "3rem",
+                        "card-gap": "2rem",
+                        gutter: "2rem",
+                        "section-margin": "5rem",
+                        "stack-lg": "2.5rem"
+                    },
+                    fontFamily: {
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["IBM Plex Mono"],
+                        "headline-lg": ["IBM Plex Mono"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["IBM Plex Mono"],
+                        "headline-md": ["IBM Plex Mono"]
+                    },
+                    fontSize: {
+                        "label-md": ["12px", {lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600"}],
+                        "body-lg": ["18px", {lineHeight: "28.8px", fontWeight: "400"}],
+                        "headline-xl": ["40px", {lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "600"}],
+                        "headline-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600"}],
+                        "body-sm": ["14px", {lineHeight: "22.4px", fontWeight: "400"}],
+                        "body-md": ["16px", {lineHeight: "25.6px", fontWeight: "400"}],
+                        "headline-sm": ["18px", {lineHeight: "24px", fontWeight: "500"}],
+                        "headline-md": ["24px", {lineHeight: "32px", fontWeight: "500"}]
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-lowest border-r border-outline-variant/30 flex flex-col py-stack-lg z-50">
+<div class="px-8 mb-12">
+<h1 class="font-headline-md text-headline-md font-bold text-cobalt">ClauseGuard</h1>
+<p class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-[0.2em] mt-1">Enterprise Governance</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-cobalt bg-cobalt/10 border border-cobalt/20 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+<span class="font-label-md text-label-md">Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+<span class="font-label-md text-label-md">Governance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+<span class="font-label-md text-label-md">Edge Node</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<div class="p-4 bg-premium-surface border border-outline-variant/20 rounded-xl flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cobalt/30 border border-cobalt/20 flex items-center justify-center text-primary-fixed font-bold text-sm">JD</div>
+<div class="overflow-hidden">
+<p class="font-label-md text-label-md text-on-surface truncate">Julian Draxler</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Legal Counsel</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between h-20 px-container-padding ml-[260px] w-[calc(100%-260px)] bg-background/80 backdrop-blur-md border-b border-outline-variant/20 sticky top-0 z-40">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-lg group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-low border border-outline-variant/30 rounded-full pl-12 pr-6 py-2.5 w-full focus:ring-1 focus:ring-cobalt/50 focus:border-cobalt/50 outline-none transition-all font-body-sm text-on-surface placeholder:text-on-surface-variant/50" placeholder="Search clauses, entities, or labels..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex gap-10">
+<a class="text-on-surface-variant hover:text-cobalt transition-colors font-label-md text-label-md" href="#">Analysis</a>
+<a class="text-cobalt font-semibold relative after:absolute after:bottom-[-28px] after:left-0 after:w-full after:h-[2px] after:bg-cobalt transition-colors font-label-md text-label-md" href="#">Compliance</a>
+<a class="text-on-surface-variant hover:text-cobalt transition-colors font-label-md text-label-md" href="#">Archive</a>
+</nav>
+<div class="h-6 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-cobalt transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-cobalt transition-colors">dynamic_feed</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-cobalt transition-colors">settings_suggest</button>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="ml-[260px] h-[calc(100vh-80px)] flex overflow-hidden">
+<!-- Left: Queue List -->
+<section class="w-[340px] h-full bg-surface-container-lowest border-r border-outline-variant/30 flex flex-col">
+<div class="p-8 border-b border-outline-variant/30 flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm">Queue</h2>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-cobalt transition-colors">tune</button>
+</div>
+<div class="flex-1 overflow-y-auto px-6 py-8 space-y-4">
+<!-- Queue Card 1: Active -->
+<div class="p-6 bg-premium-surface border-2 border-cobalt rounded-2xl transition-all cursor-pointer active-glow">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+<span class="font-label-md text-[10px] text-error uppercase tracking-wider font-bold">CRITICAL</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono">4829-X</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface mb-2 leading-tight">Liability Limitation Clause</h3>
+<p class="text-[12px] text-on-surface-variant line-clamp-2 leading-relaxed">Conflict found in section 4.2 versus master agreement...</p>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-7 h-7 rounded-full border-2 border-premium-surface bg-tertiary-container text-[9px] flex items-center justify-center font-bold">AI</div>
+<div class="w-7 h-7 rounded-full border-2 border-premium-surface bg-secondary-container text-[9px] flex items-center justify-center font-bold">LR</div>
+</div>
+<span class="text-[10px] text-cobalt font-medium">Active Review</span>
+</div>
+</div>
+<!-- Queue Card 2 -->
+<div class="p-6 bg-transparent hover:bg-surface-container border border-outline-variant/20 rounded-2xl transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+<span class="font-label-md text-[10px] text-tertiary uppercase tracking-wider font-bold">HIGH</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono">4831-C</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface mb-2 leading-tight">Data Retention Period</h3>
+<p class="text-[12px] text-on-surface-variant line-clamp-2 leading-relaxed">Proposed 5-year retention contradicts policy...</p>
+</div>
+<!-- Queue Card 3 -->
+<div class="p-6 bg-transparent hover:bg-surface-container border border-outline-variant/20 rounded-2xl transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-on-surface-variant/40"></div>
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">MEDIUM</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono">4835-Z</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface mb-2 leading-tight">Governing Law Amendment</h3>
+</div>
+</div>
+</section>
+<!-- Center: Comparison View -->
+<section class="flex-1 h-full bg-background flex flex-col p-container-padding relative overflow-hidden">
+<div class="mb-12 flex items-center justify-between">
+<div>
+<nav class="flex items-center gap-2 text-[11px] text-on-surface-variant uppercase tracking-[0.2em] mb-3">
+<span>Contracts</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span>Service Level Agreements</span>
+</nav>
+<h2 class="font-headline-xl text-[38px] leading-tight">Liability Limitation <span class="text-on-surface-variant/40 font-light ml-2">Section 4.2</span></h2>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-premium-surface border border-outline-variant/40 rounded-xl font-label-md text-label-md hover:bg-surface-container-highest transition-all">Compare History</button>
+<button class="px-6 py-3 bg-cobalt text-on-primary rounded-xl font-label-md text-label-md hover:opacity-90 transition-all shadow-lg shadow-cobalt/20">Export Report</button>
+</div>
+</div>
+<div class="flex-1 grid grid-cols-2 gap-gutter items-start pb-24">
+<!-- Standard Version -->
+<div class="flex flex-col h-full">
+<div class="mb-6 flex items-center gap-3 px-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">verified_user</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-[0.2em]">Master Template <span class="text-[10px] ml-2 opacity-50 font-mono">v2.4.0</span></span>
+</div>
+<div class="flex-1 bg-surface-container-lowest p-10 rounded-3xl border border-outline-variant/20 leading-[1.85] overflow-y-auto text-on-surface/90 text-body-lg">
+<p class="mb-8">4.2 <span class="font-semibold text-on-surface">Liability.</span> Except for instances of gross negligence or willful misconduct, the aggregate liability of <span class="entity-highlight">ClauseGuard</span> under this agreement shall be limited to the total fees paid by the client during the twelve (12) month period immediately preceding the claim.</p>
+<p class="text-on-surface-variant/70 italic">In no event shall either party be liable for indirect, incidental, or consequential damages, including loss of profits or revenue.</p>
+</div>
+</div>
+<!-- Incoming Draft -->
+<div class="flex flex-col h-full">
+<div class="mb-6 flex items-center gap-3 px-2">
+<span class="material-symbols-outlined text-cobalt text-[20px]">history_edu</span>
+<span class="font-label-md text-label-md text-cobalt uppercase tracking-[0.2em]">Incoming Draft <span class="text-[10px] ml-2 text-cobalt/60 font-mono">ID: J.SMITH</span></span>
+</div>
+<div class="flex-1 bg-premium-surface p-10 rounded-3xl border border-cobalt/30 leading-[1.85] overflow-y-auto shadow-2xl shadow-cobalt/5 text-body-lg">
+<p class="mb-8">4.2 <span class="font-semibold text-on-surface">Liability.</span> Except for instances of gross negligence or willful misconduct, the aggregate liability of <span class="entity-highlight">the Contractor</span> shall <span class="clause-highlight-removed">be limited to the total fees paid</span> <span class="clause-highlight-added">not exceed twice (2x) the total fees paid</span> by the client during the <span class="clause-highlight-removed">twelve (12)</span> <span class="clause-highlight-added">twenty-four (24)</span> month period immediately preceding the claim.</p>
+<p>In no event shall <span class="clause-highlight-removed">either party</span> <span class="clause-highlight-added">the Client</span> be liable for indirect, incidental, or consequential damages, including loss of profits or revenue.</p>
+</div>
+</div>
+</div>
+<!-- Bottom: Analysis Intelligence Drawer -->
+<div class="absolute bottom-0 left-0 right-0 p-container-padding z-30 pointer-events-none">
+<div class="bg-[#151928] border border-outline-variant/40 rounded-t-[2.5rem] shadow-[0_-20px_50px_-10px_rgba(0,0,0,0.5)] pointer-events-auto transform translate-y-[85%] hover:translate-y-[82%] transition-all duration-700 ease-out" id="reasoning-drawer">
+<div class="p-8 cursor-pointer group flex items-center justify-between" onclick="toggleReasoning()">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-2xl bg-cobalt/10 flex items-center justify-center text-cobalt border border-cobalt/20">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm block tracking-tight">Analysis Intelligence</span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-[0.2em] font-medium">Rule Engine GP-2023-A • Real-time Policy Validation</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 bg-error/10 px-4 py-2 rounded-full border border-error/20">
+<div class="w-2 h-2 rounded-full bg-error animate-pulse"></div>
+<span class="text-[11px] font-bold text-error uppercase tracking-widest font-mono">88/100 RISK</span>
+</div>
+<span class="material-symbols-outlined transition-transform duration-500 text-on-surface-variant group-hover:text-cobalt" id="chevron">keyboard_arrow_up</span>
+</div>
+</div>
+<div class="p-8 pt-0 opacity-0 transition-opacity duration-300 grid grid-cols-3 gap-6" id="reasoning-content">
+<div class="bg-surface-container-lowest/50 p-6 rounded-2xl border border-outline-variant/20">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-[10px] font-bold text-cobalt bg-cobalt/10 px-2 py-0.5 rounded">01</span>
+<h4 class="font-label-md text-label-md uppercase tracking-widest text-on-surface">Paraphrase</h4>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">Incoming draft modifies liability cap from standard 12-month Lookback to 24-month period with a 2x multiplier, removing mutual vendor protections.</p>
+</div>
+<div class="bg-tertiary-container/5 p-6 rounded-2xl border border-tertiary/10">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-[10px] font-bold text-tertiary bg-tertiary-container/20 px-2 py-0.5 rounded">02</span>
+<h4 class="font-label-md text-label-md uppercase tracking-widest text-on-surface">Compare</h4>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">Master requires mutuality and 12-month limit. Draft introduces 100% duration increase and 200% financial ceiling increase, creating risk asymmetry.</p>
+</div>
+<div class="bg-error-container/5 p-6 rounded-2xl border border-error/10">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-[10px] font-bold text-error bg-error-container/20 px-2 py-0.5 rounded">03</span>
+<h4 class="font-label-md text-label-md uppercase tracking-widest text-on-surface">Classify</h4>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">High Risk Deviation. Violation of Policy GP-2023-A. Exposure exceeds safe threshold by 3.5x. Immediate intervention required.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right: AI Resolution Proposals -->
+<section class="w-[360px] h-full bg-surface-container-lowest border-l border-outline-variant/30 flex flex-col p-8">
+<h2 class="font-headline-sm text-headline-sm mb-10 flex items-center gap-3">
+<span class="material-symbols-outlined text-cobalt" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+            Proposals
+        </h2>
+<div class="flex-1 space-y-6 overflow-y-auto pr-2">
+<!-- Proposal Card 1: Recommended -->
+<div class="bg-premium-surface border border-cobalt/40 p-6 rounded-2xl space-y-5 shadow-xl shadow-cobalt/5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[9px] text-cobalt bg-cobalt/10 border border-cobalt/20 px-2 py-1 rounded uppercase tracking-widest font-bold">Recommended</span>
+<span class="text-[10px] text-on-surface-variant font-mono">98% Match</span>
+</div>
+<p class="text-body-sm text-on-surface leading-relaxed">Revert lookback to 12 months and restore mutual liability language for compliance.</p>
+<button class="w-full py-3.5 bg-cobalt text-white font-label-md text-label-md rounded-xl hover:shadow-lg hover:shadow-cobalt/30 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                    Approve Proposal
+                </button>
+</div>
+<!-- Proposal Card 2: Compromise -->
+<div class="bg-transparent border border-outline-variant/30 p-6 rounded-2xl space-y-5 hover:bg-surface-container/50 transition-all">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[9px] text-tertiary bg-tertiary-container/10 border border-tertiary/20 px-2 py-1 rounded uppercase tracking-widest">Compromise</span>
+<span class="text-[10px] text-on-surface-variant font-mono">84% Match</span>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">Accept 2x fee cap but insist on 12-month period to limit tail risk duration.</p>
+<button class="w-full py-3.5 bg-surface-container-high border border-outline-variant/40 text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">rule</span>
+                    Apply Modification
+                </button>
+</div>
+<!-- Resolution Impact Card -->
+<div class="mt-auto pt-10">
+<div class="bg-surface-container-low border border-dashed border-outline-variant/30 rounded-2xl p-6">
+<h5 class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold mb-4">Resolution Impact</h5>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-[12px] text-on-surface-variant">Policy Alignment</span>
+<span class="text-[12px] text-primary-fixed font-mono">+42%</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[12px] text-on-surface-variant">Risk Reduction</span>
+<span class="text-[12px] text-error font-mono">Lowers to 12</span>
+</div>
+<p class="text-[11px] text-on-surface-variant/60 italic leading-relaxed pt-2 border-t border-outline-variant/10">
+                            Proposals verified against 2024 Playbook and regional SaaS legal precedents.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+    let isExpanded = false;
+    function toggleReasoning() {
+        const drawer = document.getElementById('reasoning-drawer');
+        const content = document.getElementById('reasoning-content');
+        const chevron = document.getElementById('chevron');
+        
+        if (!isExpanded) {
+            drawer.style.transform = 'translateY(0)';
+            content.style.opacity = '1';
+            chevron.style.transform = 'rotate(180deg)';
+            isExpanded = true;
+        } else {
+            drawer.style.transform = 'translateY(85%)';
+            content.style.opacity = '0';
+            chevron.style.transform = 'rotate(0deg)';
+            isExpanded = false;
+        }
+    }
+
+    // Interactive queue items
+    document.querySelectorAll('.cursor-pointer').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            if(!card.classList.contains('border-cobalt')) {
+                card.style.transform = 'translateX(4px)';
+                card.style.borderColor = 'rgba(37, 99, 235, 0.4)';
+            }
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateX(0)';
+            if(!card.classList.contains('border-cobalt')) {
+                card.style.borderColor = '';
+            }
+        });
+    });
+</script>
+</body></html>

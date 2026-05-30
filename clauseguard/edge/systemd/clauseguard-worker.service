@@ -1,0 +1,15 @@
+[Unit]
+Description=ClauseGuard Telemetry Background Worker Service
+After=network-online.target clauseguard-backend.service
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/clauseguard
+ExecStart=/home/pi/clauseguard/venv/bin/python -m backend.tasks.worker
+Restart=on-failure
+RestartSec=5
+Environment=DB_PATH=clauseguard.db
+
+[Install]
+WantedBy=multi-user.target

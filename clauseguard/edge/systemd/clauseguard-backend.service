@@ -1,0 +1,15 @@
+[Unit]
+Description=ClauseGuard FastAPI Backend Service
+After=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/clauseguard
+ExecStart=/home/pi/clauseguard/venv/bin/uvicorn backend.main:app --host 0.0.0.0 --port 8000
+Restart=on-failure
+RestartSec=5
+Environment=LOG_LEVEL=INFO DB_PATH=clauseguard.db
+
+[Install]
+WantedBy=multi-user.target

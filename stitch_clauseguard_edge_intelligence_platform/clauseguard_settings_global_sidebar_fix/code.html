@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ClauseGuard | RPi5 Edge Node Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#1a1b21",
+                        "on-secondary-container": "#b7b8bf",
+                        "primary-container": "#2563eb",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-background": "#e3e2e8",
+                        "on-error": "#690005",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-dim": "#121317",
+                        surface: "#121317",
+                        "surface-bright": "#38393e",
+                        "on-tertiary": "#581e00",
+                        background: "#121317",
+                        "on-primary-fixed": "#00174b",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#bc4800",
+                        "tertiary-fixed": "#ffdbcd",
+                        outline: "#8d90a0",
+                        primary: "#b4c5ff",
+                        "on-secondary": "#2e3036",
+                        "surface-container": "#1f1f24",
+                        error: "#ffb4ab",
+                        "surface-container-high": "#292a2e",
+                        "on-tertiary-fixed": "#360f00",
+                        "secondary-fixed-dim": "#c6c6cd",
+                        "inverse-on-surface": "#2f3035",
+                        "inverse-primary": "#0053db",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        secondary: "#c6c6cd",
+                        "on-primary": "#002a78",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-container-low": "#1a1b20",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-lowest": "#0d0e12",
+                        "surface-tint": "#b4c5ff",
+                        "error-container": "#93000a",
+                        "secondary-container": "#47494f",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-variant": "#343439",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-surface": "#e3e2e8",
+                        "secondary-fixed": "#e2e2e9",
+                        "on-secondary-fixed-variant": "#45474c",
+                        "surface-container-highest": "#343439",
+                        "primary-fixed-dim": "#b4c5ff",
+                        tertiary: "#ffb596",
+                        "inverse-surface": "#e3e2e8",
+                        "outline-variant": "#434655"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "stack-sm": "0.5rem",
+                        "stack-md": "1rem",
+                        "container-padding": "2rem",
+                        "card-gap": "1.5rem",
+                        gutter: "1rem",
+                        "section-margin": "4rem",
+                        "stack-lg": "2rem"
+                    },
+                    fontFamily: {
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["IBM Plex Mono"],
+                        "headline-lg": ["IBM Plex Mono"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["IBM Plex Mono"],
+                        "headline-md": ["IBM Plex Mono"],
+                        headline: ["ibmPlexMono"],
+                        display: ["ibmPlexMono"],
+                        body: ["Inter"],
+                        label: ["Inter"]
+                    },
+                    fontSize: {
+                        "label-md": ["12px", {lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600"}],
+                        "body-lg": ["18px", {lineHeight: "28.8px", fontWeight: "400"}],
+                        "headline-xl": ["40px", {lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "600"}],
+                        "headline-lg": ["32px", {lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600"}],
+                        "body-sm": ["14px", {lineHeight: "22.4px", fontWeight: "400"}],
+                        "body-md": ["16px", {lineHeight: "25.6px", fontWeight: "400"}],
+                        "headline-sm": ["18px", {lineHeight: "24px", fontWeight: "500"}],
+                        "headline-md": ["24px", {lineHeight: "32px", fontWeight: "500"}]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        body {
+            background-color: #0B0C10;
+            color: #e3e2e8;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .card-border {
+            border: 1px solid #262932;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #16181D;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #262932;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container border-r border-outline-variant flex flex-col py-stack-lg z-50">
+<div class="px-6 mb-10 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[20px]" data-icon="shield">shield</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">ClauseGuard</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-label-md">Enterprise Governance</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1"><a class="flex items-center px-6 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined mr-4">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a><a class="flex items-center px-6 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined mr-4">description</span><span class="font-label-md text-label-md">Documents</span></a><a class="flex items-center px-6 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined mr-4">analytics</span><span class="font-label-md text-label-md">Analysis</span></a><a class="flex items-center px-6 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined mr-4">gavel</span><span class="font-label-md text-label-md">Governance</span></a><a class="flex items-center px-6 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined mr-4">dns</span><span class="font-label-md text-label-md">Edge Node</span></a><a class="flex items-center px-6 py-3 text-primary border-l-2 border-primary bg-primary-container/10 transition-opacity opacity-90" href="#"><span class="material-symbols-outlined mr-4">settings</span><span class="font-label-md text-label-md">Settings</span></a></nav>
+<div class="mt-auto px-6 pt-stack-lg border-t border-outline-variant/30"><div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg card-border"><div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant"><img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFfwA12hRUY6X8ZxFJ8X3lzOJPANGH33vpT0gaGey1AViV4bzH61VAl_cV8SrLBdx7jYVi6ao8Lz9HOl8wDbCnaw33bbGKmxCXiSWlZgjsQ5U7kQ6g6mR4rtXN54UTZ7GMNi-XNYNWh_zzIpaJbQkDONfVlDULIu42WHfJhYdE9U5CF5u11jswXhFLl6vmHplHo9CtZ0eFEx009KQuEB6D23-G_eJctgTpnZGnQIyyvHu6uLrvUshaZgJBlIWNLeFeHMYsx1CV4uw"/></div><div class="flex-1 min-w-0"> <p class="font-label-md text-[13px] text-on-surface truncate">Alex Rivera</p><p class="text-[11px] text-on-surface-variant uppercase tracking-wider">Node Admin</p></div><button class="text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-[20px]">logout</span></button></div></div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 h-16 ml-[260px] w-[calc(100%-260px)] flex items-center justify-between px-container-padding bg-surface border-b border-outline-variant z-40">
+<div class="flex items-center bg-surface-container-low card-border rounded px-3 py-1.5 w-96">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none text-body-sm focus:ring-0 w-full text-on-surface placeholder:text-outline" placeholder="Search telemetry, logs, or clauses..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant font-label-md hover:text-primary transition-colors duration-200" href="#">Analysis</a>
+<a class="text-on-surface-variant font-label-md hover:text-primary transition-colors duration-200" href="#">Compliance</a>
+<a class="text-on-surface-variant font-label-md hover:text-primary transition-colors duration-200" href="#">Archive</a>
+</nav>
+<div class="h-6 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:ring-1 focus:ring-primary outline-none">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:ring-1 focus:ring-primary outline-none">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:ring-1 focus:ring-primary outline-none">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFfwA12hRUY6X8ZxFJ8X3lzOJPANGH33vpT0gaGey1AViV4bzH61VAl_cV8SrLBdx7jYVi6ao8Lz9HOl8wDbCnaw33bbGKmxCXiSWlZgjsQ5U7kQ6g6mR4rtXN54UTZ7GMNi-XNYNWh_zzIpaJbQkDONfVlDULIu42WHfJhYdE9U5CF5u11jswXhFLl6vmHplHo9CtZ0eFEx009KQuEB6D23-G_eJctgTpnZGnQIyyvHu6uLrvUshaZgJBlIWNLeFeHMYsx1CV4uw"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] pt-16 min-h-screen p-container-padding bg-surface-dim/30">
+<!-- Header Section -->
+<section class="mb-stack-lg max-w-6xl mx-auto">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Settings</h2>
+<p class="text-on-surface-variant font-body-md mt-1">Configure node behavior, appearance, and security protocols.</p>
+</div>
+<div class="flex items-center bg-surface-container-low card-border rounded px-4 py-2 w-72">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] mr-2">search</span>
+<input class="bg-transparent border-none text-body-sm focus:ring-0 w-full text-on-surface placeholder:text-outline" placeholder="Find settings..." type="text"/>
+</div>
+</div>
+</section>
+<!-- Layout Container -->
+<div class="max-w-6xl mx-auto grid grid-cols-12 gap-10">
+<!-- Vertical Settings Nav -->
+<aside class="col-span-12 lg:col-span-3">
+<nav class="flex flex-col gap-1.5">
+<a class="px-4 py-3 bg-primary-container/10 text-primary rounded-lg font-label-md flex items-center gap-3 transition-all border border-primary/20" href="#">
+<span class="material-symbols-outlined">settings</span> General
+                </a>
+<a class="px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg font-label-md flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">security</span> Security
+                </a>
+<a class="px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg font-label-md flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">lan</span> Network
+                </a>
+<a class="px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg font-label-md flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">notification_important</span> Notifications
+                </a>
+<a class="px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface rounded-lg font-label-md flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">api</span> Webhooks &amp; API
+                </a>
+</nav>
+</aside>
+<!-- Settings Panes -->
+<div class="col-span-12 lg:col-span-9 space-y-10 pb-20">
+<!-- Appearance Section -->
+<section class="bg-surface-container-low card-border rounded-xl p-8 shadow-sm">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">palette</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Appearance</h3>
+<p class="text-body-sm text-on-surface-variant">Customize the visual interface of your dashboard.</p>
+</div>
+</div>
+<div class="space-y-10">
+<div>
+<p class="font-label-md text-on-surface mb-2">Theme Preference</p>
+<p class="text-body-sm text-on-surface-variant mb-6">Select a visual style that suits your environment or matches your system settings.</p>
+<div class="grid grid-cols-2 gap-6">
+<!-- Light Mode Option -->
+<button class="group flex flex-col gap-4 p-1 rounded-xl border border-outline-variant hover:border-primary/50 transition-all bg-surface-container-lowest overflow-hidden">
+<div class="w-full h-32 bg-slate-50 rounded-lg flex items-center justify-center">
+<div class="relative w-2/3 h-1/2 bg-white rounded border border-slate-200 shadow-sm flex flex-col p-2 gap-1">
+<div class="w-1/2 h-1 bg-slate-100 rounded"></div>
+<div class="w-full h-1 bg-slate-50 rounded"></div>
+<div class="mt-auto flex gap-1">
+<div class="w-2 h-2 rounded-full bg-blue-500"></div>
+<div class="w-4 h-2 rounded bg-slate-200"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between px-3 pb-3">
+<span class="font-label-md text-on-surface">Light Mode</span>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant group-hover:border-primary/50 transition-colors"></div>
+</div>
+</button>
+<!-- Dark Mode Option (Selected) -->
+<button class="group flex flex-col gap-4 p-1 rounded-xl border-2 border-primary bg-surface-container-highest overflow-hidden">
+<div class="w-full h-32 bg-zinc-900 rounded-lg flex items-center justify-center">
+<div class="relative w-2/3 h-1/2 bg-zinc-800 rounded border border-zinc-700 shadow-sm flex flex-col p-2 gap-1">
+<div class="w-1/2 h-1 bg-zinc-700 rounded"></div>
+<div class="w-full h-1 bg-zinc-750 rounded"></div>
+<div class="mt-auto flex gap-1">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-4 h-2 rounded bg-zinc-700"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between px-3 pb-3">
+<span class="font-label-md text-on-surface">Dark Mode</span>
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-on-primary"></div>
+</div>
+</div>
+</button>
+</div>
+</div>
+<!-- Additional UI Settings -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10 pt-6 border-t border-outline-variant/20">
+<div>
+<label class="font-label-md text-on-surface block mb-2">Interface Scaling</label>
+<p class="text-body-sm text-on-surface-variant mb-4">Adjust the density of the dashboard layout.</p>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface px-4 py-2 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all">
+<option>Compact</option>
+<option selected="">Standard</option>
+<option>Spacious</option>
+</select>
+</div>
+<div>
+<label class="font-label-md text-on-surface block mb-2">Accent Color</label>
+<p class="text-body-sm text-on-surface-variant mb-4">Personalize the primary interactive elements.</p>
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-primary border-2 border-white ring-2 ring-primary cursor-pointer"></div>
+<div class="w-8 h-8 rounded-full bg-blue-500 hover:ring-2 hover:ring-blue-500 transition-all cursor-pointer"></div>
+<div class="w-8 h-8 rounded-full bg-emerald-500 hover:ring-2 hover:ring-emerald-500 transition-all cursor-pointer"></div>
+<div class="w-8 h-8 rounded-full bg-amber-500 hover:ring-2 hover:ring-amber-500 transition-all cursor-pointer"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Actions -->
+<div class="flex items-center justify-between border-t border-outline-variant/20 pt-8">
+<p class="text-body-sm text-on-surface-variant">Last updated on Node: Oct 24, 2023 at 14:32:01</p>
+<div class="flex items-center gap-4">
+<button class="px-8 py-2.5 text-on-surface font-label-md hover:bg-surface-container-high rounded-lg transition-colors border border-transparent hover:border-outline-variant">
+                        Discard Changes
+                    </button>
+<button class="px-10 py-2.5 bg-primary text-on-primary font-label-md rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-primary/10">
+                        Apply Settings
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button -->
+<div class="fixed bottom-8 right-8 group">
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-xl hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="bolt" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+<span class="absolute right-16 top-1/2 -translate-y-1/2 bg-surface-container-high px-4 py-2 rounded text-body-sm text-on-surface whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none card-border">Run Benchmarks</span>
+</div>
+</main>
+<script>
+    // Micro-interaction for log scrolling
+    const terminal = document.querySelector('.custom-scrollbar');
+    if (terminal) {
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+</script>
+</body></html>

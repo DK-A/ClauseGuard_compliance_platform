@@ -1,0 +1,27 @@
+# Frontend dependencies and builds
+clauseguard/frontend/node_modules/
+clauseguard/frontend/dist/
+clauseguard/frontend/.svelte-kit/
+clauseguard/frontend/build/
+
+# Python environment and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+ENV/
+env/
+
+# Database and uploaded data files
+clauseguard/clauseguard.db
+clauseguard/chroma_db/
+uploaded_data/
+clauseguard/uploaded_data/
+
+# OS and IDE files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
